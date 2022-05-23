@@ -12,14 +12,14 @@
     {%if check%}
     <ol>
        {% for x in check%}
-       <li>{{x.fname}}</li>
-       <li>{{x.lname}}</li>
-       <li>{{x.mobilenum}}</li>
-       <li>{{x.mail}}</li>
-       <li>{{x.addrs}}</li>
+       <li><font color="red">hello,{{x.fname}}</font></li>
+       <li>your mobilenumber registered is:{{x.mobile_num}}</li>
+       <li>your mail registered is:{{x.mail}}</li>
+       <li>adress:{{x.address}}</li>
        {% endfor %}
     </ol>
     {% endif %}
+    <a class="btn btn-primary btn-lg" href="/logout" role="button">logout</a>
   </div>
   </body>
 </html>

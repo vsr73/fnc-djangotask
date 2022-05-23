@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import *
+from django.contrib import messages
 
 def signup(request):
     if request.method=='POST':
@@ -10,13 +11,25 @@ def signup(request):
         t=request.POST.get("addrs")
         p=request.POST.get("pswrd")
         q=request.POST.get("cnfrm_pswrd")
+        user=details.objects.filter(mail=w)
+        if user:
+            messages.error(request,"email already exists try a new mail")
+            return redirect('/signup')
+        elif p==q:
+            try:
+                mems=details(fname=x,lname=y,mobile_num=z,address=t,password=p,mail=w)
+                mems.save()
+                messages.info(request,"login to view details,account created successfully")
+                return redirect('/')
 
-        try:
-            mems=details(fname=x,lname=y,mobile_num=z,address=t,password=p)
-            mems.save()
-            return render(request,'testapp/home1.html')
-        except:
-            return render(request,'testapp/retry.html')
+            except :
+                messages.error(request,'error try again')
+                return redirect('/signup')
+        else:
+            messages.error(request,'password doesnt match')
+            return redirect('/signup')
+
+
     else:
         return render(request,"testapp/home.html")
 def login(request):
@@ -36,3 +49,10 @@ def login(request):
 
 def mainpage(request):
     return render(request,'testapp/mainpage.html')
+
+
+def logout(request):
+    messages.info(request,"logged out successfully")
+    return redirect('/login')
+def test(request):
+    return redirect('/')

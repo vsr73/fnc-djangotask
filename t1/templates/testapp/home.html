@@ -14,6 +14,11 @@
     <div class="jumbotron">
       <div class="container">
       <h3>register with your account</h3>
+      <font color="red">
+        {%for message in messages%}
+        {{message}}
+        {% endfor %}
+      </font>
     <form method="POST">
       {% csrf_token %}
        firstname:
@@ -30,11 +35,10 @@
        <br><input name="addrs">
        <br>
        password:<br>
-       <input name="pswrd">
+       <input name="pswrd" type="password">
        <br>
        conformpassword;
-       <br><input name="cnfrm_pswrd">
-
+       <br><input name="cnfrm_pswrd" type="password">
       <button value="submit">Signup</button>
 
 
